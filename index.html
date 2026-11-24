@@ -762,7 +762,7 @@
      */
     function loadLocalState() {
       try {
-        const savedUrl = localStorage.getItem(STORAGE_KEYS.GAS_URL);
+        const savedUrl = localStorage.getItem(STORAGE_KEYS.GAS_URL) || 'https://script.google.com/macros/s/AKfycbwIFjlzjpXzgpvDJUfwoTvPfA25k1oFWzklUrQ_XinIVN0TMn7b21UPN1FArQcSLI8VZg/exec';
         if (savedUrl) state.gasUrl = savedUrl.trim();
 
         const savedPlayer = localStorage.getItem(STORAGE_KEYS.PLAYER);
