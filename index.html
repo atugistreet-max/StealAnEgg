@@ -10,88 +10,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
-
   <style>
-    /* ベースフォントと基本スタイル */
     body {
-      font-family: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Meiryo', sans-serif;
-      background-color: #f4f7fb;
-      color: #1e293b;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
       -webkit-tap-highlight-color: transparent;
-      overscroll-behavior-y: contain;
+      background-color: #f8fafc;
     }
 
-    /* Cosmic（にじ色）アニメーション用スタイル */
-    @keyframes rainbow-flow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .rarity-cosmic-border {
-      background: linear-gradient(120deg, #ff3b30, #ff9500, #ffcc00, #34c759, #007aff, #af52de, #ff2d55, #ff3b30);
-      background-size: 300% 300%;
-      animation: rainbow-flow 4s ease infinite;
-      padding: 3px;
-    }
-
-    .rarity-cosmic-badge {
-      background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #8b5cf6, #ec4899);
-      background-size: 250% 250%;
-      animation: rainbow-flow 4s ease infinite;
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-    }
-
-    .rarity-cosmic-owned-bg {
-      background: linear-gradient(135deg, #fff1f2 0%, #fefce8 25%, #ecfdf5 50%, #eff6ff 75%, #faf5ff 100%);
-    }
-
-    /* Legendary（金色）グラデーション */
-    .rarity-legendary-badge {
-      background: linear-gradient(135deg, #f59e0b 0%, #fde047 50%, #ca8a04 100%);
-      color: #422006;
-    }
-
-    .rarity-legendary-owned-bg {
-      background: linear-gradient(135deg, #fefce8 0%, #fef08a 100%);
-    }
-
-    /* Secret（深い赤・黒系）グラデーション */
-    .rarity-secret-badge {
-      background: linear-gradient(135deg, #18181b 0%, #991b1b 55%, #dc2626 100%);
-      color: #ffffff;
-    }
-
-    .rarity-secret-owned-bg {
-      background: linear-gradient(135deg, #27272a 0%, #7f1d1d 100%);
-      color: #ffffff;
-    }
-
-    /* ペットカードタップ時のポップアニメーション */
-    @keyframes pop-bounce {
-      0% { transform: scale(1); }
-      40% { transform: scale(0.94); }
-      75% { transform: scale(1.04); }
-      100% { transform: scale(1); }
-    }
-
-    .animate-pop {
-      animation: pop-bounce 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    /* 同期アイコンの回転 */
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .animate-spin-icon {
-      display: inline-block;
-      animation: spin-slow 0.9s linear infinite;
-    }
-
-    /* スクロールバー非表示（横スクロールボタン用） */
+    /* 横スクロールバーをすっきり隠す */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -100,669 +26,524 @@
       scrollbar-width: none;
     }
 
-    /* iOS Safariで入力時に自動ズームされないよう16px以上を強制 */
-    input, select {
-      font-size: 16px !important;
+    /* Cosmic（にじ色）アニメーション */
+    .rarity-cosmic {
+      background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #c77dff);
+      background-size: 250% 250%;
+      animation: cosmicShift 5s ease infinite;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+    @keyframes cosmicShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Secret（深紅×漆黒） */
+    .rarity-secret {
+      background: linear-gradient(135deg, #18181b 0%, #7f1d1d 55%, #dc2626 100%);
+      color: #fef2f2;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Eternal（濃い紫と銀） */
+    .rarity-eternal {
+      background: linear-gradient(135deg, #2e1065 0%, #581c87 45%, #cbd5e1 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(15, 23, 42, 0.7);
+    }
+
+    /* Divine（白金色に光る感じ） */
+    .rarity-divine {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef08a 30%, #ffffff 55%, #fde047 80%, #fef9c3 100%);
+      background-size: 220% 220%;
+      animation: divineGlow 3.5s ease infinite;
+      color: #713f12;
+      box-shadow: 0 0 12px rgba(250, 204, 21, 0.55);
+    }
+    @keyframes divineGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ゲット済みカードのチェックアニメーション */
+    .pet-card {
+      transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+    .pet-card:active {
+      transform: scale(0.96);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col overflow-x-hidden pb-28">
+<body class="pb-24 text-slate-800 select-none">
 
-  <!-- ==================== 固定ヘッダー ==================== -->
-  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b-2 border-slate-200 shadow-sm">
-    <div class="max-w-3xl mx-auto px-3 py-2.5 flex items-center justify-between gap-2">
-      <!-- タイトル -->
-      <div class="flex items-center gap-1.5 min-w-0">
-        <span class="text-2xl sm:text-3xl select-none" aria-hidden="true">🥚</span>
-        <h1 class="text-lg sm:text-2xl font-black tracking-tight text-slate-800 truncate">
-          卵を盗む！ずかん
+  <!-- ヘッダー -->
+  <header id="appHeader" class="sticky top-0 z-30 bg-sky-600 text-white shadow-md transition-colors duration-300">
+    <div class="max-w-3xl mx-auto px-3 pt-3 pb-2.5">
+      <div class="flex items-center justify-between gap-2 mb-2.5">
+        <h1 class="text-lg sm:text-xl font-black tracking-tight flex items-center gap-1.5">
+          <span>🥚</span>
+          <span>卵を盗む！ずかん＆きろく</span>
         </h1>
+        <div class="flex items-center gap-1.5">
+          <button id="syncBtn" onclick="syncFromServer(true)" class="bg-white/20 hover:bg-white/30 active:scale-95 text-white font-bold text-sm px-2.5 py-1.5 rounded-xl flex items-center gap-1 transition">
+            <span>🔄</span><span class="hidden sm:inline">同期</span>
+          </button>
+          <button onclick="openSettingsModal()" class="bg-white/20 hover:bg-white/30 active:scale-95 text-white font-bold text-sm px-2.5 py-1.5 rounded-xl transition" aria-label="設定">
+            ⚙️
+          </button>
+        </div>
       </div>
 
-      <!-- 右側ボタン群（同期・設定） -->
-      <div class="flex items-center gap-2 shrink-0">
-        <button
-          id="btn-sync"
-          type="button"
-          onclick="syncFromServer(true)"
-          class="flex items-center gap-1 px-3 py-2 rounded-xl bg-sky-100 hover:bg-sky-200 active:scale-95 text-sky-800 font-extrabold text-sm sm:text-base border-2 border-sky-200 transition"
-          aria-label="最新データに同期する"
-        >
-          <span id="sync-icon" class="text-base sm:text-lg leading-none">🔄</span>
-          <span class="hidden xs:inline sm:inline">同期</span>
+      <!-- プレイヤー切り替え -->
+      <div class="grid grid-cols-2 gap-2">
+        <button id="btnPlayerHaruya" onclick="switchPlayer('はるや')" class="py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition shadow-sm border-2">
+          <span>👦</span><span>はるや</span>
         </button>
-
-        <button
-          id="btn-settings"
-          type="button"
-          onclick="openSettingsModal()"
-          class="flex items-center gap-1 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 font-extrabold text-sm sm:text-base border-2 border-slate-200 transition"
-          aria-label="設定を開く"
-        >
-          <span class="text-base sm:text-lg leading-none">⚙️</span>
-          <span class="hidden sm:inline">設定</span>
+        <button id="btnPlayerJiiji" onclick="switchPlayer('じいじ')" class="py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition shadow-sm border-2">
+          <span>👴</span><span>じいじ</span>
         </button>
       </div>
-    </div>
 
-    <!-- ステータスバー（同期状況の表示） -->
-    <div id="status-bar" class="bg-slate-50 border-t border-slate-100 px-3 py-1">
-      <div class="max-w-3xl mx-auto flex items-center justify-between text-xs sm:text-sm font-bold">
-        <span id="sync-status-badge" class="inline-flex items-center gap-1.5 text-slate-600">
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-          <span>準備中...</span>
-        </span>
-        <span id="last-sync-time" class="text-slate-400 text-xs"></span>
+      <!-- 同期ステータス -->
+      <div class="mt-2 flex items-center justify-between text-xs font-bold text-white/90 px-1">
+        <div id="syncStatusText" class="flex items-center gap-1.5 truncate">
+          <span>⏳</span><span>じゅんび中...</span>
+        </div>
+        <div id="lastSyncTime" class="shrink-0 opacity-85"></div>
       </div>
     </div>
   </header>
 
-  <!-- ==================== メインコンテンツ ==================== -->
-  <main class="flex-1 w-full max-w-3xl mx-auto px-3 pt-3 space-y-4">
+  <!-- メインコンテンツ -->
+  <main class="max-w-3xl mx-auto px-3 pt-3">
 
-    <!-- URL未設定時のやさしいお知らせバナー -->
-    <div id="setup-banner" class="hidden rounded-2xl bg-amber-50 border-2 border-amber-300 p-3.5 shadow-sm">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-        <div class="flex items-start gap-2.5">
-          <span class="text-2xl leading-none shrink-0">📢</span>
-          <div class="text-sm sm:text-base text-amber-900 leading-snug">
-            <p class="font-extrabold">いまは「このスマホだけ」に保存中！</p>
-            <p class="text-xs sm:text-sm text-amber-800 mt-0.5">
-              スプレッドシートのURLを設定すると、スマホとパソコンで記録がいっしょになります。
-            </p>
-          </div>
-        </div>
-        <button
-          type="button"
-          onclick="openSettingsModal()"
-          class="shrink-0 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 active:scale-95 text-amber-950 font-black text-sm shadow-sm transition"
-        >
-          ⚙️ URLを設定する
-        </button>
-      </div>
-    </div>
-
-    <!-- プレイヤー切り替えタブ（はるや / じいじ） -->
-    <section aria-label="プレイヤー切り替え" class="grid grid-cols-2 gap-2.5">
-      <button
-        id="player-btn-はるや"
-        type="button"
-        onclick="switchPlayer('はるや')"
-        class="py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 shadow-sm"
-      >
-        <span class="text-2xl sm:text-3xl">👦</span>
-        <span>はるや</span>
-      </button>
-
-      <button
-        id="player-btn-じいじ"
-        type="button"
-        onclick="switchPlayer('じいじ')"
-        class="py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 shadow-sm"
-      >
-        <span class="text-2xl sm:text-3xl">👴</span>
-        <span>じいじ</span>
-      </button>
-    </section>
-
-    <!-- ==================== タブ1：ペット図鑑 ==================== -->
-    <section id="view-pokedex" class="space-y-4">
-      <!-- コンプリート進捗カード -->
-      <div id="pokedex-summary-card" class="rounded-3xl p-4 sm:p-5 text-white shadow-md transition-colors">
-        <div class="flex items-end justify-between gap-2 mb-2">
+    <!-- ==================== タブ1: ペットずかん ==================== -->
+    <section id="viewDex" class="space-y-3">
+      <!-- コンプリート率カード -->
+      <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-slate-100">
+        <div class="flex items-end justify-between mb-2">
           <div>
-            <p class="text-xs sm:text-sm font-bold opacity-90" id="summary-player-label">はるや の ペットずかん</p>
-            <div class="flex items-baseline gap-1.5 mt-0.5">
-              <span id="summary-owned-count" class="text-3xl sm:text-4xl font-black">0</span>
-              <span class="text-base sm:text-lg font-bold opacity-90">/ <span id="summary-total-count">31</span> ぴき</span>
+            <div class="text-xs font-bold text-slate-500">あつめたペット</div>
+            <div class="text-2xl sm:text-3xl font-black text-slate-800">
+              <span id="ownedCount" class="text-sky-600">0</span>
+              <span class="text-lg text-slate-400 mx-1">/</span>
+              <span id="totalCount">91</span>
+              <span class="text-base font-bold text-slate-600 ml-1">ぴき</span>
             </div>
           </div>
           <div class="text-right">
-            <span class="text-xs sm:text-sm font-bold opacity-90 block">コンプリート率</span>
-            <span id="summary-percent" class="text-3xl sm:text-4xl font-black">0%</span>
+            <div class="text-xs font-bold text-slate-500">コンプリート率</div>
+            <div id="completePercent" class="text-2xl sm:text-3xl font-black text-emerald-600">0%</div>
           </div>
         </div>
-        <!-- プログレスバー -->
-        <div class="w-full h-5 bg-black/20 rounded-full overflow-hidden p-1">
-          <div
-            id="summary-progress-bar"
-            class="h-full bg-white rounded-full transition-all duration-500 ease-out"
-            style="width: 0%"
-          ></div>
+        <div class="w-full h-4 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+          <div id="completeBar" class="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="width: 0%"></div>
         </div>
       </div>
 
-      <!-- バイオーム絞り込みボタン -->
-      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="バイオーム絞り込み">
-        <button type="button" onclick="setBiomeFilter('すべて')" data-biome="すべて" class="biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95">
-          🌟 すべて
-        </button>
-        <button type="button" onclick="setBiomeFilter('もり')" data-biome="もり" class="biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95">
-          🌲 もり
-        </button>
-        <button type="button" onclick="setBiomeFilter('みずうみ')" data-biome="みずうみ" class="biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95">
-          💧 みずうみ
-        </button>
-        <button type="button" onclick="setBiomeFilter('さばく')" data-biome="さばく" class="biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95">
-          🏜️ さばく
-        </button>
-        <button type="button" onclick="setBiomeFilter('ジャングル')" data-biome="ジャングル" class="biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95">
-          🌴 ジャングル
-        </button>
+      <!-- バイオーム絞り込み（横スクロール対応） -->
+      <div class="sticky top-[132px] z-20 -mx-3 px-3 py-2 bg-slate-50/95 backdrop-blur-sm border-b border-slate-200/70">
+        <div id="biomeFilterContainer" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+          <!-- JSで生成 -->
+        </div>
       </div>
 
-      <!-- 操作ヒント -->
-      <p class="text-center text-xs sm:text-sm font-bold text-slate-500">
-        👇 ペットのカードをタップすると「✓ ゲット！」になるよ！
-      </p>
-
-      <!-- ペット一覧コンテナ -->
-      <div id="pets-container" class="space-y-6"></div>
+      <!-- ペット一覧 -->
+      <div id="petListContainer" class="space-y-5 pt-1">
+        <!-- JSで生成 -->
+      </div>
     </section>
 
-    <!-- ==================== タブ2：進捗きろく ==================== -->
-    <section id="view-progress" class="hidden space-y-5">
-      <!-- 最新のスピードとお金（大きく表示） -->
+    <!-- ==================== タブ2: きろく（進捗） ==================== -->
+    <section id="viewProgress" class="hidden space-y-4">
+      <!-- 最新のスピード・お金 -->
       <div class="grid grid-cols-2 gap-3">
-        <div class="rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 text-white p-4 shadow-md">
-          <div class="flex items-center gap-1.5 text-sm sm:text-base font-extrabold opacity-95">
-            <span class="text-xl">⚡</span>
-            <span>さいしんのスピード</span>
-          </div>
-          <p id="latest-speed" class="text-2xl sm:text-3xl font-black mt-2 break-all leading-tight">---</p>
+        <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-sky-100">
+          <div class="text-xs font-bold text-sky-600 mb-1">⚡ さいしんスピード</div>
+          <div id="latestSpeed" class="text-2xl sm:text-3xl font-black text-slate-800 truncate">-</div>
         </div>
-
-        <div class="rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-4 shadow-md">
-          <div class="flex items-center gap-1.5 text-sm sm:text-base font-extrabold opacity-95">
-            <span class="text-xl">💰</span>
-            <span>さいしんのお金</span>
-          </div>
-          <p id="latest-money" class="text-2xl sm:text-3xl font-black mt-2 break-all leading-tight">---</p>
+        <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-amber-100">
+          <div class="text-xs font-bold text-amber-600 mb-1">💰 さいしんのお金</div>
+          <div id="latestMoney" class="text-2xl sm:text-3xl font-black text-slate-800 truncate">-</div>
         </div>
       </div>
 
       <!-- 新しいきろく入力フォーム -->
-      <div class="rounded-3xl bg-white border-2 border-slate-200 p-4 sm:p-5 shadow-sm">
-        <h2 class="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2 mb-4">
-          <span>📝</span>
-          <span id="progress-form-title">はるや の きろくをつける</span>
+      <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-slate-100 space-y-3">
+        <h2 class="text-lg font-black text-slate-800 flex items-center gap-1.5">
+          <span>✏️</span><span>きょうのきろくをのこす</span>
         </h2>
-
-        <form id="progress-form" onsubmit="handleProgressSubmit(event)" class="space-y-3.5">
+        <div class="space-y-3">
           <div>
-            <label for="input-date" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-              📅 日付
-            </label>
-            <input
-              id="input-date"
-              type="date"
-              required
-              class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-            >
+            <label class="block text-sm font-bold text-slate-600 mb-1">📅 日付</label>
+            <input type="date" id="inputDate" class="w-full text-lg font-bold px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
           </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="grid grid-cols-2 gap-2.5">
             <div>
-              <label for="input-speed" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-                ⚡ スピード
-              </label>
-              <input
-                id="input-speed"
-                type="text"
-                required
-                placeholder="例：1500 や 40K"
-                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-amber-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-              >
+              <label class="block text-sm font-bold text-slate-600 mb-1">⚡ スピード</label>
+              <input type="text" id="inputSpeed" placeholder="例: 120" class="w-full text-lg font-bold px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
             </div>
-
             <div>
-              <label for="input-money" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-                💰 お金
-              </label>
-              <input
-                id="input-money"
-                type="text"
-                required
-                placeholder="例：$500K や $1.2M"
-                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-emerald-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-              >
+              <label class="block text-sm font-bold text-slate-600 mb-1">💰 お金</label>
+              <input type="text" id="inputMoney" placeholder="例: $5.2M" class="w-full text-lg font-bold px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
             </div>
           </div>
-
-          <button
-            type="submit"
-            class="w-full py-4 rounded-2xl bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-black text-lg sm:text-xl shadow-md transition flex items-center justify-center gap-2"
-          >
-            <span>💾</span>
-            <span>きろくを保存する</span>
+          <button onclick="handleAddProgress()" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-white font-black text-lg rounded-2xl shadow-sm transition">
+            💾 きろくをほぞんする
           </button>
-        </form>
+        </div>
       </div>
 
       <!-- 過去のきろく一覧 -->
-      <div class="space-y-3">
-        <h2 class="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2 px-1">
-          <span>📜</span>
-          <span>これまでのきろく</span>
+      <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-slate-100">
+        <h2 class="text-lg font-black text-slate-800 mb-3 flex items-center gap-1.5">
+          <span>📜</span><span>これまでのきろく</span>
         </h2>
-        <div id="progress-list" class="space-y-2.5"></div>
+        <div id="progressList" class="space-y-2.5">
+          <!-- JSで生成 -->
+        </div>
       </div>
     </section>
 
-    <!-- ==================== タブ3：ペット追加 ==================== -->
-    <section id="view-add-pet" class="hidden space-y-5">
-      <div class="rounded-3xl bg-white border-2 border-slate-200 p-4 sm:p-5 shadow-sm">
-        <h2 class="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2 mb-1">
-          <span>➕</span>
-          <span>あたらしいペットを追加する</span>
+    <!-- ==================== タブ3: ペット追加 ==================== -->
+    <section id="viewAddPet" class="hidden space-y-4">
+      <div class="bg-white rounded-3xl p-4 shadow-sm border-2 border-slate-100 space-y-4">
+        <h2 class="text-lg font-black text-slate-800 flex items-center gap-1.5">
+          <span>➕</span><span>あたらしいペットをずかんに追加</span>
         </h2>
-        <p class="text-xs sm:text-sm font-bold text-slate-500 mb-4">
-          ゲームに新しいペットが出たら、ここからずかんに増やせるよ！
-        </p>
 
-        <form id="add-pet-form" onsubmit="handleAddPetSubmit(event)" class="space-y-4">
-          <!-- バイオーム -->
+        <!-- プレビュー -->
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="text-xs font-bold text-slate-400 mb-2">カードのプレビュー</div>
+          <div id="addPetPreview"></div>
+        </div>
+
+        <div class="space-y-3">
           <div>
-            <label for="pet-biome" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-              🗺️ バイオーム（ばしょ）
-            </label>
-            <select
-              id="pet-biome"
-              onchange="updatePetPreview()"
-              class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-            >
-              <option value="もり">🌲 もり</option>
-              <option value="みずうみ">💧 みずうみ</option>
-              <option value="さばく">🏜️ さばく</option>
-              <option value="ジャングル">🌴 ジャングル</option>
-            </select>
+            <label class="block text-sm font-bold text-slate-600 mb-1">🐾 ペットの名前（英語でも日本語でもOK）</label>
+            <input type="text" id="newPetName" oninput="updateAddPetPreview()" placeholder="例: Golden Dragon" class="w-full text-lg font-bold px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
           </div>
 
-          <!-- ペット名 -->
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-sm font-bold text-slate-600 mb-1">🗺️ バイオーム</label>
+              <select id="newPetBiome" onchange="updateAddPetPreview()" class="w-full text-base font-bold px-3 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
+                <!-- JSで生成 -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-600 mb-1">✨ レア度</label>
+              <select id="newPetRarity" onchange="updateAddPetPreview()" class="w-full text-base font-bold px-3 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
+                <!-- JSで生成 -->
+              </select>
+            </div>
+          </div>
+
           <div>
-            <label for="pet-name" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-              🐾 ペットのなまえ
-            </label>
-            <input
-              id="pet-name"
-              type="text"
-              required
-              oninput="updatePetPreview()"
-              placeholder="例：King Snake"
-              class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-            >
+            <label class="block text-sm font-bold text-slate-600 mb-1">💵 1秒あたりの収入</label>
+            <input type="text" id="newPetIncome" oninput="updateAddPetPreview()" placeholder="例: $50K/s" class="w-full text-lg font-bold px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
           </div>
 
-          <!-- レア度 -->
-          <div>
-            <label for="pet-rarity" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-              ✨ レア度
-            </label>
-            <select
-              id="pet-rarity"
-              onchange="updatePetPreview()"
-              class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-            >
-              <option value="Common">Common（グレー）</option>
-              <option value="Uncommon">Uncommon（みどり）</option>
-              <option value="Rare">Rare（あお）</option>
-              <option value="Epic">Epic（むらさき）</option>
-              <option value="Legendary">Legendary（金色）</option>
-              <option value="Mythic">Mythic（ピンク）</option>
-              <option value="Cosmic">Cosmic（にじ色）</option>
-              <option value="Secret">Secret（深い赤・黒）</option>
-            </select>
-          </div>
-
-          <!-- 1秒あたりの収入 -->
-          <div>
-            <label for="pet-income" class="block text-sm sm:text-base font-extrabold text-slate-700 mb-1">
-              💵 1秒あたりの収入
-            </label>
-            <input
-              id="pet-income"
-              type="text"
-              required
-              oninput="updatePetPreview()"
-              placeholder="例：$3.5M/s"
-              class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-            >
-          </div>
-
-          <!-- カードプレビュー -->
-          <div class="pt-1">
-            <p class="text-xs sm:text-sm font-extrabold text-slate-500 mb-2">👀 こんなカードになるよ（プレビュー）</p>
-            <div id="add-pet-preview" class="max-w-[220px] mx-auto"></div>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-black text-lg sm:text-xl shadow-md transition flex items-center justify-center gap-2"
-          >
-            <span>➕</span>
-            <span>ずかんに追加する</span>
+          <button onclick="handleAddPet()" class="w-full py-3.5 bg-sky-500 hover:bg-sky-600 active:scale-[0.98] text-white font-black text-lg rounded-2xl shadow-sm transition">
+            ✨ ずかんに追加する
           </button>
-        </form>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== 画面下部 固定ナビゲーション ==================== -->
-  <nav class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t-2 border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.06)]">
-    <div class="max-w-3xl mx-auto grid grid-cols-3 gap-1 px-2 py-2">
-      <button
-        id="nav-pokedex"
-        type="button"
-        onclick="switchTab('pokedex')"
-        class="nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95"
-      >
-        <span class="text-2xl leading-none">📖</span>
-        <span class="text-xs sm:text-sm mt-1">ペットずかん</span>
+  <!-- 下部ナビゲーション -->
+  <nav class="fixed bottom-0 inset-x-0 z-30 bg-white border-t-2 border-slate-200 shadow-lg">
+    <div class="max-w-3xl mx-auto grid grid-cols-3">
+      <button id="navDex" onclick="switchTab('dex')" class="py-2.5 flex flex-col items-center justify-center gap-0.5 font-black text-xs sm:text-sm text-sky-600">
+        <span class="text-2xl">📖</span>
+        <span>ずかん</span>
       </button>
-
-      <button
-        id="nav-progress"
-        type="button"
-        onclick="switchTab('progress')"
-        class="nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95"
-      >
-        <span class="text-2xl leading-none">📈</span>
-        <span class="text-xs sm:text-sm mt-1">きろく</span>
+      <button id="navProgress" onclick="switchTab('progress')" class="py-2.5 flex flex-col items-center justify-center gap-0.5 font-bold text-xs sm:text-sm text-slate-400">
+        <span class="text-2xl">📈</span>
+        <span>きろく</span>
       </button>
-
-      <button
-        id="nav-add-pet"
-        type="button"
-        onclick="switchTab('add-pet')"
-        class="nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95"
-      >
-        <span class="text-2xl leading-none">➕</span>
-        <span class="text-xs sm:text-sm mt-1">ペット追加</span>
+      <button id="navAddPet" onclick="switchTab('addPet')" class="py-2.5 flex flex-col items-center justify-center gap-0.5 font-bold text-xs sm:text-sm text-slate-400">
+        <span class="text-2xl">➕</span>
+        <span>ペット追加</span>
       </button>
     </div>
   </nav>
 
-  <!-- ==================== 設定モーダル（GAS URL設定） ==================== -->
-  <div id="settings-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl w-full max-w-md p-5 sm:p-6 shadow-2xl border-2 border-slate-200 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-black text-slate-800 flex items-center gap-2">
-          <span>⚙️</span>
-          <span>スプレッドシート連携設定</span>
-        </h2>
-        <button
-          type="button"
-          onclick="closeSettingsModal()"
-          class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xl font-black text-slate-600"
-          aria-label="閉じる"
-        >
-          ✕
-        </button>
+  <!-- 設定モーダル -->
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-black text-slate-800">⚙️ スプレッドシート連携設定</h3>
+        <button onclick="closeSettingsModal()" class="text-2xl text-slate-400 hover:text-slate-600 font-bold px-2">×</button>
       </div>
 
-      <div class="space-y-4">
-        <p class="text-sm font-bold text-slate-600 leading-relaxed">
-          Google Apps Script をウェブアプリとして公開したときのURL（<code class="bg-slate-100 px-1 rounded text-xs">https://script.google.com/.../exec</code>）を貼り付けてください。
+      <div class="space-y-2">
+        <label class="block text-sm font-bold text-slate-600">Google Apps Script ウェブアプリURL</label>
+        <input type="url" id="inputGasUrl" placeholder="https://script.google.com/macros/s/.../exec" class="w-full text-sm font-bold px-3.5 py-3 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:outline-none bg-slate-50">
+        <p class="text-xs text-slate-500 leading-relaxed">
+          ※ デプロイしたURLを貼り付けて「保存して接続テスト」を押してください。
         </p>
-
-        <div>
-          <label for="gas-url-input" class="block text-sm font-extrabold text-slate-700 mb-1.5">
-            🔗 ウェブアプリURL
-          </label>
-          <input
-            id="gas-url-input"
-            type="url"
-            placeholder="https://script.google.com/macros/s/..."
-            class="w-full px-3.5 py-3 rounded-2xl border-2 border-slate-300 focus:border-sky-500 focus:outline-none font-bold text-slate-800 bg-slate-50"
-          >
-        </div>
-
-        <!-- 接続テスト結果メッセージ -->
-        <div id="test-result-box" class="hidden rounded-2xl p-3 text-sm font-bold"></div>
-
-        <div class="grid grid-cols-1 gap-2.5 pt-1">
-          <button
-            type="button"
-            onclick="testGasConnection()"
-            id="btn-test-gas"
-            class="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-800 font-extrabold text-base border-2 border-slate-300 transition"
-          >
-            🔍 接続テストをする
-          </button>
-
-          <button
-            type="button"
-            onclick="saveGasUrl()"
-            class="w-full py-3.5 rounded-2xl bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-black text-lg shadow-md transition"
-          >
-            💾 保存して同期する
-          </button>
-
-          <button
-            type="button"
-            onclick="clearGasUrl()"
-            class="w-full py-2.5 rounded-2xl bg-white hover:bg-rose-50 text-rose-600 font-bold text-sm border border-rose-200 transition"
-          >
-            URLを消してお試しモードに戻す
-          </button>
-        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ==================== 削除確認モーダル（confirm()の代替） ==================== -->
-  <div id="confirm-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl border-2 border-slate-200 text-center space-y-4">
-      <div class="text-4xl">🗑️</div>
-      <h3 class="text-xl font-black text-slate-800">このきろくを消しますか？</h3>
-      <p id="confirm-modal-detail" class="text-sm font-bold text-slate-600 bg-slate-50 rounded-2xl p-3"></p>
-      <div class="grid grid-cols-2 gap-3 pt-1">
-        <button
-          type="button"
-          onclick="closeConfirmModal()"
-          class="py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-base transition"
-        >
-          やめる
+      <div class="flex flex-col sm:flex-row gap-2 pt-1">
+        <button onclick="saveAndTestGasUrl()" class="flex-1 py-3 bg-sky-500 hover:bg-sky-600 text-white font-black rounded-2xl transition">
+          💾 保存して接続テスト
         </button>
-        <button
-          type="button"
-          id="confirm-delete-btn"
-          class="py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-black text-base shadow transition"
-        >
-          消す
+        <button onclick="closeSettingsModal()" class="py-3 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition">
+          とじる
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== トースト通知 ==================== -->
-  <div
-    id="toast"
-    class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2"
-  >
-    <div id="toast-inner" class="px-5 py-3 rounded-full shadow-lg font-black text-sm sm:text-base text-white bg-slate-800 whitespace-nowrap">
-      保存しました！
-    </div>
+  <!-- トースト通知 -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl text-white font-black text-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 max-w-[90vw] text-center">
   </div>
 
-  <!-- ==================== アプリケーション JavaScript ==================== -->
   <script>
     // =========================================================================
-    // 1. 初期ペットデータ（コードからも簡単に追加・編集可能）
+    // 定数・初期データ定義
     // =========================================================================
-    const DEFAULT_PETS = [
-      // 【もり】
-      { biome: 'もり', name: 'Chicken', rarity: 'Common', income: '$1/s' },
-      { biome: 'もり', name: 'Dog', rarity: 'Common', income: '$2/s' },
-      { biome: 'もり', name: 'Bird', rarity: 'Uncommon', income: '$8/s' },
-      { biome: 'もり', name: 'Owl', rarity: 'Rare', income: '$35/s' },
-      { biome: 'もり', name: 'Raccoon', rarity: 'Rare', income: '$45/s' },
-      { biome: 'もり', name: 'Fox', rarity: 'Epic', income: '$180/s' },
-      { biome: 'もり', name: 'Bear', rarity: 'Epic', income: '$240/s' },
-      { biome: 'もり', name: 'Brr Brr Patapim', rarity: 'Legendary', income: '$1.8K/s' },
+    const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwIFjlzjpXzgpvDJUfwoTvPfA25k1oFWzklUrQ_XinIVN0TMn7b21UPN1FArQcSLI8VZg/exec';
 
-      // 【みずうみ】
-      { biome: 'みずうみ', name: 'Frog', rarity: 'Common', income: '$3/s' },
-      { biome: 'みずうみ', name: 'Duckling', rarity: 'Common', income: '$4/s' },
-      { biome: 'みずうみ', name: 'Catfish', rarity: 'Uncommon', income: '$12/s' },
-      { biome: 'みずうみ', name: 'Turtle', rarity: 'Rare', income: '$60/s' },
-      { biome: 'みずうみ', name: 'Trulimero Trulicina', rarity: 'Epic', income: '$260/s' },
-      { biome: 'みずうみ', name: 'Swan', rarity: 'Epic', income: '$320/s' },
-      { biome: 'みずうみ', name: 'Axolotl', rarity: 'Legendary', income: '$2.8K/s' },
-      { biome: 'みずうみ', name: 'Leviathan', rarity: 'Cosmic', income: '$220K/s' },
+    const STORAGE_KEYS = {
+      GAS_URL: 'steal_an_egg_gas_url',
+      PLAYER: 'steal_an_egg_player',
+      DATA: 'steal_an_egg_data'
+    };
 
-      // 【さばく】
-      { biome: 'さばく', name: 'Jerboa', rarity: 'Common', income: '$6/s' },
-      { biome: 'さばく', name: 'Fennec', rarity: 'Uncommon', income: '$18/s' },
-      { biome: 'さばく', name: 'Camel', rarity: 'Rare', income: '$75/s' },
-      { biome: 'さばく', name: 'Tob Tobi Tob Tob', rarity: 'Epic', income: '$325/s' },
-      { biome: 'さばく', name: 'Snake', rarity: 'Legendary', income: '$3.6K/s' },
-      { biome: 'さばく', name: 'Sand Spider', rarity: 'Mythic', income: '$16K/s' },
-      { biome: 'さばく', name: 'Scorpion', rarity: 'Mythic', income: '$18.5K/s' },
-      { biome: 'さばく', name: 'Royal Sphinx', rarity: 'Cosmic', income: '$280K/s' },
-
-      // 【ジャングル】
-      { biome: 'ジャングル', name: 'Chimpanzee', rarity: 'Rare', income: '$90/s' },
-      { biome: 'ジャングル', name: 'Toucan', rarity: 'Rare', income: '$110/s' },
-      { biome: 'ジャングル', name: 'Crocodile', rarity: 'Epic', income: '$420/s' },
-      { biome: 'ジャングル', name: 'Gorilla', rarity: 'Legendary', income: '$4.8K/s' },
-      { biome: 'ジャングル', name: 'Orangutini Ananassini', rarity: 'Legendary', income: '$5.5K/s' },
-      { biome: 'ジャングル', name: 'Spider', rarity: 'Mythic', income: '$22K/s' },
-      { biome: 'ジャングル', name: 'Tiger', rarity: 'Mythic', income: '$28K/s' }
-    ];
-
-    // バイオーム定義（表示順とアイコン・カラー）
+    // バイオーム定義（既存4つ＋新規6つ＝全10バイオーム）
     const BIOMES = [
-      { id: 'もり', label: 'もり', icon: '🌲', headerBg: 'bg-emerald-100 text-emerald-900 border-emerald-300' },
-      { id: 'みずうみ', label: 'みずうみ', icon: '💧', headerBg: 'bg-sky-100 text-sky-900 border-sky-300' },
-      { id: 'さばく', label: 'さばく', icon: '🏜️', headerBg: 'bg-amber-100 text-amber-900 border-amber-300' },
-      { id: 'ジャングル', label: 'ジャングル', icon: '🌴', headerBg: 'bg-lime-100 text-lime-900 border-lime-300' }
+      { id: 'もり', name: 'もり', icon: '🌲', color: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
+      { id: 'みずうみ', name: 'みずうみ', icon: '💧', color: 'bg-sky-100 text-sky-800 border-sky-300' },
+      { id: 'さばく', name: 'さばく', icon: '🏜️', color: 'bg-amber-100 text-amber-800 border-amber-300' },
+      { id: 'ジャングル', name: 'ジャングル', icon: '🌴', color: 'bg-lime-100 text-lime-800 border-lime-300' },
+      { id: 'ゆき', name: 'ゆき', icon: '❄️', color: 'bg-cyan-100 text-cyan-800 border-cyan-300' },
+      { id: 'かざん', name: 'かざん', icon: '🌋', color: 'bg-red-100 text-red-800 border-red-300' },
+      { id: 'しんかい', name: 'しんかい', icon: '🌊', color: 'bg-blue-100 text-blue-900 border-blue-300' },
+      { id: 'たいこ', name: 'たいこ', icon: '🦕', color: 'bg-stone-200 text-stone-800 border-stone-400' },
+      { id: 'あらし', name: 'あらし', icon: '⚡', color: 'bg-indigo-100 text-indigo-900 border-indigo-300' },
+      { id: 'てんしとあくま', name: 'てんしとあくま', icon: '👼', color: 'bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300' }
     ];
 
-    // レア度ごとのスタイル定義
+    // レア度スタイル定義（Common〜Cosmic＋Secret・Eternal・Divine）
     const RARITY_STYLES = {
       Common: {
         label: 'Common',
-        border: 'border-[#9e9e9e]',
-        badge: 'bg-[#9e9e9e] text-white',
-        ownedBg: 'bg-gray-100',
-        checkBg: 'bg-gray-600 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-slate-400 text-white',
+        border: 'border-slate-300',
+        ownedBg: 'bg-slate-100 border-slate-500'
       },
       Uncommon: {
         label: 'Uncommon',
-        border: 'border-[#22c55e]',
-        badge: 'bg-[#22c55e] text-white',
-        ownedBg: 'bg-green-100',
-        checkBg: 'bg-green-600 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-emerald-500 text-white',
+        border: 'border-emerald-300',
+        ownedBg: 'bg-emerald-50 border-emerald-500'
       },
       Rare: {
         label: 'Rare',
-        border: 'border-[#3b82f6]',
-        badge: 'bg-[#3b82f6] text-white',
-        ownedBg: 'bg-blue-100',
-        checkBg: 'bg-blue-600 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-blue-500 text-white',
+        border: 'border-blue-300',
+        ownedBg: 'bg-blue-50 border-blue-500'
       },
       Epic: {
         label: 'Epic',
-        border: 'border-[#a855f7]',
-        badge: 'bg-[#a855f7] text-white',
-        ownedBg: 'bg-purple-100',
-        checkBg: 'bg-purple-600 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-purple-600 text-white',
+        border: 'border-purple-300',
+        ownedBg: 'bg-purple-50 border-purple-500'
       },
       Legendary: {
         label: 'Legendary',
-        border: 'border-[#eab308]',
-        badge: 'rarity-legendary-badge',
-        ownedBg: 'rarity-legendary-owned-bg',
-        checkBg: 'bg-amber-500 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-amber-950',
+        border: 'border-amber-300',
+        ownedBg: 'bg-amber-50 border-amber-500'
       },
       Mythic: {
         label: 'Mythic',
-        border: 'border-[#ec4899]',
-        badge: 'bg-[#ec4899] text-white',
-        ownedBg: 'bg-pink-100',
-        checkBg: 'bg-pink-600 text-white',
-        isCosmic: false,
-        isDarkOwned: false
+        badge: 'bg-gradient-to-r from-pink-500 to-rose-500 text-white',
+        border: 'border-pink-300',
+        ownedBg: 'bg-pink-50 border-pink-500'
       },
       Cosmic: {
         label: 'Cosmic',
-        border: 'border-transparent',
-        badge: 'rarity-cosmic-badge',
-        ownedBg: 'rarity-cosmic-owned-bg',
-        checkBg: 'bg-indigo-600 text-white',
-        isCosmic: true,
-        isDarkOwned: false
+        badge: 'rarity-cosmic',
+        border: 'border-indigo-300',
+        ownedBg: 'bg-gradient-to-br from-pink-50 via-amber-50 to-sky-50 border-indigo-500'
       },
       Secret: {
         label: 'Secret',
-        border: 'border-[#dc2626]',
-        badge: 'rarity-secret-badge',
-        ownedBg: 'rarity-secret-owned-bg',
-        checkBg: 'bg-red-600 text-white',
-        isCosmic: false,
-        isDarkOwned: true
+        badge: 'rarity-secret',
+        border: 'border-red-400',
+        ownedBg: 'bg-red-50 border-red-700'
+      },
+      Eternal: {
+        label: 'Eternal',
+        badge: 'rarity-eternal',
+        border: 'border-purple-400',
+        ownedBg: 'bg-gradient-to-br from-purple-100 via-slate-100 to-purple-50 border-purple-800'
+      },
+      Divine: {
+        label: 'Divine',
+        badge: 'rarity-divine border border-amber-300',
+        border: 'border-yellow-400',
+        ownedBg: 'bg-gradient-to-br from-yellow-50 via-white to-amber-100 border-yellow-500 shadow-md'
       }
     };
 
-    // ローカルストレージ保存用キー
-    const STORAGE_KEYS = {
-      GAS_URL: 'steal_an_egg_gas_url_v1',
-      DATA: 'steal_an_egg_data_v1',
-      PLAYER: 'steal_an_egg_player_v1'
-    };
+    // 初期ペットデータ（既存31種＋新規60種＝合計91種）
+    const DEFAULT_PETS = [
+      // ■ もり（8種）
+      { name: 'Chicken', biome: 'もり', rarity: 'Common', income: '$1/s' },
+      { name: 'Dog', biome: 'もり', rarity: 'Common', income: '$2/s' },
+      { name: 'Bird', biome: 'もり', rarity: 'Uncommon', income: '$8/s' },
+      { name: 'Owl', biome: 'もり', rarity: 'Rare', income: '$35/s' },
+      { name: 'Raccoon', biome: 'もり', rarity: 'Rare', income: '$45/s' },
+      { name: 'Fox', biome: 'もり', rarity: 'Epic', income: '$180/s' },
+      { name: 'Bear', biome: 'もり', rarity: 'Epic', income: '$240/s' },
+      { name: 'Brr Brr Patapim', biome: 'もり', rarity: 'Legendary', income: '$1.8K/s' },
+
+      // ■ みずうみ（8種）
+      { name: 'Frog', biome: 'みずうみ', rarity: 'Common', income: '$3/s' },
+      { name: 'Duckling', biome: 'みずうみ', rarity: 'Common', income: '$4/s' },
+      { name: 'Catfish', biome: 'みずうみ', rarity: 'Uncommon', income: '$12/s' },
+      { name: 'Turtle', biome: 'みずうみ', rarity: 'Rare', income: '$60/s' },
+      { name: 'Trulimero Trulicina', biome: 'みずうみ', rarity: 'Epic', income: '$260/s' },
+      { name: 'Swan', biome: 'みずうみ', rarity: 'Epic', income: '$320/s' },
+      { name: 'Axolotl', biome: 'みずうみ', rarity: 'Legendary', income: '$2.8K/s' },
+      { name: 'Leviathan', biome: 'みずうみ', rarity: 'Cosmic', income: '$220K/s' },
+
+      // ■ さばく（8種）
+      { name: 'Jerboa', biome: 'さばく', rarity: 'Common', income: '$6/s' },
+      { name: 'Fennec', biome: 'さばく', rarity: 'Uncommon', income: '$18/s' },
+      { name: 'Camel', biome: 'さばく', rarity: 'Rare', income: '$75/s' },
+      { name: 'Tob Tobi Tob Tob', biome: 'さばく', rarity: 'Epic', income: '$325/s' },
+      { name: 'Snake', biome: 'さばく', rarity: 'Legendary', income: '$3.6K/s' },
+      { name: 'Sand Spider', biome: 'さばく', rarity: 'Mythic', income: '$16K/s' },
+      { name: 'Scorpion', biome: 'さばく', rarity: 'Mythic', income: '$18.5K/s' },
+      { name: 'Royal Sphinx', biome: 'さばく', rarity: 'Cosmic', income: '$280K/s' },
+
+      // ■ ジャングル（7種）
+      { name: 'Chimpanzee', biome: 'ジャングル', rarity: 'Common', income: '$10/s' },
+      { name: 'Toucan', biome: 'ジャングル', rarity: 'Uncommon', income: '$25/s' },
+      { name: 'Crocodile', biome: 'ジャングル', rarity: 'Rare', income: '$90/s' },
+      { name: 'Gorilla', biome: 'ジャングル', rarity: 'Epic', income: '$400/s' },
+      { name: 'Orangutini Ananassini', biome: 'ジャングル', rarity: 'Legendary', income: '$4.5K/s' },
+      { name: 'Spider', biome: 'ジャングル', rarity: 'Mythic', income: '$22K/s' },
+      { name: 'Tiger', biome: 'ジャングル', rarity: 'Cosmic', income: '$320K/s' },
+
+      // ■ ゆき（8種）
+      { name: 'Penguin', biome: 'ゆき', rarity: 'Rare', income: '$140/s' },
+      { name: 'Walrus', biome: 'ゆき', rarity: 'Epic', income: '$600/s' },
+      { name: 'Polar Bear', biome: 'ゆき', rarity: 'Legendary', income: '$7K/s' },
+      { name: 'Sabertooth Tiger', biome: 'ゆき', rarity: 'Mythic', income: '$35K/s' },
+      { name: 'Mammoth', biome: 'ゆき', rarity: 'Mythic', income: '$42K/s' },
+      { name: 'King Mammoth', biome: 'ゆき', rarity: 'Cosmic', income: '$400K/s' },
+      { name: 'Yeti', biome: 'ゆき', rarity: 'Secret', income: '$5M/s' },
+      { name: 'Ice Dragon', biome: 'ゆき', rarity: 'Eternal', income: '$65M/s' },
+
+      // ■ かざん（8種）
+      { name: 'Lava Gecko', biome: 'かざん', rarity: 'Rare', income: '$180/s' },
+      { name: 'Lava Frog', biome: 'かざん', rarity: 'Epic', income: '$850/s' },
+      { name: 'Flaming Bull', biome: 'かざん', rarity: 'Legendary', income: '$9.5K/s' },
+      { name: 'Lava Iguana', biome: 'かざん', rarity: 'Legendary', income: '$11K/s' },
+      { name: 'Chillin Chilli', biome: 'かざん', rarity: 'Mythic', income: '$55K/s' },
+      { name: 'Cerberus', biome: 'かざん', rarity: 'Secret', income: '$8M/s' },
+      { name: 'Phoenix', biome: 'かざん', rarity: 'Eternal', income: '$85M/s' },
+      { name: 'Lava Dragon', biome: 'かざん', rarity: 'Eternal', income: '$100M/s' },
+
+      // ■ しんかい（8種）
+      { name: 'Parrotfish', biome: 'しんかい', rarity: 'Rare', income: '$220/s' },
+      { name: 'Swordfish', biome: 'しんかい', rarity: 'Epic', income: '$1.1K/s' },
+      { name: 'Shark', biome: 'しんかい', rarity: 'Legendary', income: '$15K/s' },
+      { name: 'Orca', biome: 'しんかい', rarity: 'Mythic', income: '$80K/s' },
+      { name: 'Whale Shark', biome: 'しんかい', rarity: 'Cosmic', income: '$700K/s' },
+      { name: 'Beluga Whale', biome: 'しんかい', rarity: 'Cosmic', income: '$850K/s' },
+      { name: 'Kraken', biome: 'しんかい', rarity: 'Secret', income: '$15M/s' },
+      { name: 'El Maja', biome: 'しんかい', rarity: 'Eternal', income: '$130M/s' },
+
+      // ■ たいこ（8種）
+      { name: 'Dodo', biome: 'たいこ', rarity: 'Rare', income: '$280/s' },
+      { name: 'Pterodactyl', biome: 'たいこ', rarity: 'Legendary', income: '$22K/s' },
+      { name: 'Ankylosaurus', biome: 'たいこ', rarity: 'Mythic', income: '$120K/s' },
+      { name: 'Triceratops', biome: 'たいこ', rarity: 'Cosmic', income: '$1.2M/s' },
+      { name: 'Bronto', biome: 'たいこ', rarity: 'Cosmic', income: '$1.5M/s' },
+      { name: 'T-Rex', biome: 'たいこ', rarity: 'Secret', income: '$25M/s' },
+      { name: 'Tralaledon', biome: 'たいこ', rarity: 'Secret', income: '$32M/s' },
+      { name: 'Mosasaurus', biome: 'たいこ', rarity: 'Eternal', income: '$180M/s' },
+
+      // ■ あらし（8種）
+      { name: 'Thunderwool', biome: 'あらし', rarity: 'Epic', income: '$1.3K/s' },
+      { name: 'Spark Pug', biome: 'あらし', rarity: 'Legendary', income: '$26K/s' },
+      { name: 'Volt Giraffe', biome: 'あらし', rarity: 'Mythic', income: '$150K/s' },
+      { name: 'Stormbreaker Rhino', biome: 'あらし', rarity: 'Cosmic', income: '$1.7M/s' },
+      { name: 'Thundercrab', biome: 'あらし', rarity: 'Cosmic', income: '$1.9M/s' },
+      { name: 'Stormclaw Wolf', biome: 'あらし', rarity: 'Secret', income: '$36M/s' },
+      { name: 'Thundercoil', biome: 'あらし', rarity: 'Secret', income: '$42M/s' },
+      { name: 'Tempest Bull', biome: 'あらし', rarity: 'Eternal', income: '$215M/s' },
+
+      // ■ てんしとあくま（20種）
+      { name: 'Light Dove', biome: 'てんしとあくま', rarity: 'Legendary', income: '$225K/s' },
+      { name: 'Winged Lamb', biome: 'てんしとあくま', rarity: 'Mythic', income: '$1.25M/s' },
+      { name: 'Sacred Moth', biome: 'てんしとあくま', rarity: 'Cosmic', income: '$16M/s' },
+      { name: 'Holy Peacock', biome: 'てんしとあくま', rarity: 'Cosmic', income: '$25M/s' },
+      { name: 'Pure Jellyfish', biome: 'てんしとあくま', rarity: 'Secret', income: '$225M/s' },
+      { name: 'Centaur', biome: 'てんしとあくま', rarity: 'Secret', income: '$350M/s' },
+      { name: 'Pegasus', biome: 'てんしとあくま', rarity: 'Eternal', income: '$1.3B/s' },
+      { name: 'ArchAngel', biome: 'てんしとあくま', rarity: 'Divine', income: '$5B/s' },
+      { name: 'Flame Sprite', biome: 'てんしとあくま', rarity: 'Legendary', income: '$225K/s' },
+      { name: 'Toro', biome: 'てんしとあくま', rarity: 'Mythic', income: '$1.25M/s' },
+      { name: 'Imp', biome: 'てんしとあくま', rarity: 'Cosmic', income: '$16M/s' },
+      { name: 'Demon Hound', biome: 'てんしとあくま', rarity: 'Cosmic', income: '$25M/s' },
+      { name: 'Gargoyle', biome: 'てんしとあくま', rarity: 'Secret', income: '$225M/s' },
+      { name: 'RazorFang', biome: 'てんしとあくま', rarity: 'Secret', income: '$350M/s' },
+      { name: 'Skeleton Horse', biome: 'てんしとあくま', rarity: 'Eternal', income: '$1.3B/s' },
+      { name: 'World Burner', biome: 'てんしとあくま', rarity: 'Divine', income: '$5B/s' },
+      { name: 'Ring Guard', biome: 'てんしとあくま', rarity: 'Secret', income: '$15M/s' },
+      { name: 'Ringlord', biome: 'てんしとあくま', rarity: 'Secret', income: '$825M/s' },
+      { name: 'Equinox', biome: 'てんしとあくま', rarity: 'Eternal', income: '$1.8B/s' },
+      { name: 'Aetheron', biome: 'てんしとあくま', rarity: 'Divine', income: '$6.9B/s' }
+    ];
 
     // =========================================================================
-    // 2. アプリの状態（State）
+    // アプリ状態管理
     // =========================================================================
     const state = {
-      currentPlayer: 'はるや',       // 'はるや' または 'じいじ'
-      currentTab: 'pokedex',         // 'pokedex' | 'progress' | 'add-pet'
-      biomeFilter: 'すべて',         // 'すべて' | 'もり' | 'みずうみ' | 'さばく' | 'ジャングル'
-      gasUrl: '',                    // Google Apps Script ウェブアプリURL
-      owned: [],                     // [{ player: 'はるや', pet: 'Chicken' }, ...]
-      progress: [],                  // [{ player: 'はるや', date: '2026-11-24', speed: '1500', money: '$25K' }, ...]
-      customPets: [],                // [{ biome: 'ジャングル', name: '...', rarity: '...', income: '...' }, ...]
-      pendingDeleteIndex: null,      // 削除確認モーダル用
+      gasUrl: DEFAULT_GAS_URL,
+      currentPlayer: 'はるや',
+      currentTab: 'dex',
+      selectedBiome: 'すべて',
+      owned: [],       // [{ player, pet }]
+      progress: [],    // [{ player, date, speed, money }]
+      customPets: [],  // [{ name, biome, rarity, income }]
       isSyncing: false
     };
 
     // =========================================================================
-    // 3. 初期化処理
+    // 初期化・ローカルストレージ
     // =========================================================================
-    window.addEventListener('DOMContentLoaded', () => {
+    function init() {
       loadLocalState();
-      setTodayDateInput();
-      updateSetupBanner();
-      renderPlayerTabs();
-      switchTab('pokedex');
-      updatePetPreview();
+      initFormOptions();
+      setTodayDate();
+      updatePlayerTheme();
+      renderAllViews();
+      updateAddPetPreview();
 
-      // URLが設定されていればスプレッドシートから最新データを同期
       if (state.gasUrl) {
         syncFromServer(false);
       } else {
-        setSyncStatus('local', 'お試しモード（この端末のみ保存）');
+        setSyncStatus('idle', 'まだスプレッドシートに同期していません');
       }
-    });
+    }
 
-    /**
-     * ローカルストレージから前回の状態を読み込む
-     */
     function loadLocalState() {
       try {
-        const savedUrl = localStorage.getItem(STORAGE_KEYS.GAS_URL) || 'https://script.google.com/macros/s/AKfycbwIFjlzjpXzgpvDJUfwoTvPfA25k1oFWzklUrQ_XinIVN0TMn7b21UPN1FArQcSLI8VZg/exec';
+        const savedUrl = localStorage.getItem(STORAGE_KEYS.GAS_URL) || DEFAULT_GAS_URL;
         if (savedUrl) state.gasUrl = savedUrl.trim();
 
         const savedPlayer = localStorage.getItem(STORAGE_KEYS.PLAYER);
@@ -777,211 +558,176 @@
           if (Array.isArray(parsed.progress)) state.progress = parsed.progress;
           if (Array.isArray(parsed.customPets)) state.customPets = parsed.customPets;
         }
-      } catch (err) {
-        console.error('ローカルデータの読み込みエラー:', err);
+      } catch (e) {
+        console.warn('ローカルデータの読み込みに失敗:', e);
       }
     }
 
-    /**
-     * 現在のデータをローカルストレージにバックアップ保存
-     */
     function saveLocalData() {
       try {
-        const payload = {
+        localStorage.setItem(STORAGE_KEYS.DATA, JSON.stringify({
           owned: state.owned,
           progress: state.progress,
           customPets: state.customPets
-        };
-        localStorage.setItem(STORAGE_KEYS.DATA, JSON.stringify(payload));
-      } catch (err) {
-        console.error('ローカルデータの保存エラー:', err);
+        }));
+      } catch (e) {
+        console.warn('ローカル保存に失敗:', e);
       }
     }
 
-    /**
-     * 今日の日付を YYYY-MM-DD 形式で入力欄にセット
-     */
-    function setTodayDateInput() {
+    function initFormOptions() {
+      const biomeSelect = document.getElementById('newPetBiome');
+      biomeSelect.innerHTML = BIOMES.map(b =>
+        `<option value="${b.id}">${b.icon} ${b.name}</option>`
+      ).join('');
+
+      const raritySelect = document.getElementById('newPetRarity');
+      raritySelect.innerHTML = Object.keys(RARITY_STYLES).map(r =>
+        `<option value="${r}">${r}</option>`
+      ).join('');
+    }
+
+    function setTodayDate() {
       const now = new Date();
       const yyyy = now.getFullYear();
       const mm = String(now.getMonth() + 1).padStart(2, '0');
       const dd = String(now.getDate()).padStart(2, '0');
-      const dateInput = document.getElementById('input-date');
-      if (dateInput && !dateInput.value) {
-        dateInput.value = `${yyyy}-${mm}-${dd}`;
-      }
+      document.getElementById('inputDate').value = `${yyyy}-${mm}-${dd}`;
     }
 
-    /**
-     * デフォルトペット + 追加ペットを合わせた全ペットリストを返す
-     */
     function getAllPets() {
-      const merged = [...DEFAULT_PETS];
-      state.customPets.forEach((cp) => {
-        if (!cp || !cp.name) return;
-        const exists = merged.some(
-          (p) => p.name.toLowerCase() === String(cp.name).toLowerCase()
-        );
-        if (!exists) {
-          merged.push({
-            biome: cp.biome || 'もり',
-            name: String(cp.name),
-            rarity: RARITY_STYLES[cp.rarity] ? cp.rarity : 'Common',
-            income: cp.income || '$0/s',
-            isCustom: true
-          });
-        }
-      });
-      return merged;
+      const names = new Set(DEFAULT_PETS.map(p => p.name));
+      const extras = state.customPets.filter(p => p && p.name && !names.has(p.name));
+      return [...DEFAULT_PETS, ...extras];
     }
 
     // =========================================================================
-    // 4. プレイヤー切り替え・タブ切り替え
+    // プレイヤー切り替え・タブ切り替え
     // =========================================================================
-    function switchPlayer(playerName) {
-      state.currentPlayer = playerName;
-      try {
-        localStorage.setItem(STORAGE_KEYS.PLAYER, playerName);
-      } catch (e) {}
-
-      renderPlayerTabs();
+    function switchPlayer(player) {
+      state.currentPlayer = player;
+      localStorage.setItem(STORAGE_KEYS.PLAYER, player);
+      updatePlayerTheme();
       renderAllViews();
     }
 
-    function renderPlayerTabs() {
-      const btnHaruya = document.getElementById('player-btn-はるや');
-      const btnJiiji = document.getElementById('player-btn-じいじ');
-      const summaryCard = document.getElementById('pokedex-summary-card');
+    function updatePlayerTheme() {
+      const header = document.getElementById('appHeader');
+      const btnHaruya = document.getElementById('btnPlayerHaruya');
+      const btnJiiji = document.getElementById('btnPlayerJiiji');
 
       if (state.currentPlayer === 'はるや') {
-        btnHaruya.className =
-          'py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 shadow-md bg-sky-500 text-white border-sky-600';
-        btnJiiji.className =
-          'py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 bg-white text-slate-500 border-slate-200 hover:bg-orange-50';
-        summaryCard.className =
-          'rounded-3xl p-4 sm:p-5 text-white shadow-md transition-colors bg-gradient-to-r from-sky-500 to-blue-600';
+        header.className = 'sticky top-0 z-30 bg-sky-600 text-white shadow-md transition-colors duration-300';
+        btnHaruya.className = 'py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition shadow-md border-2 bg-white text-sky-700 border-white';
+        btnJiiji.className = 'py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition border-2 bg-white/15 text-white/90 border-white/30 hover:bg-white/25';
       } else {
-        btnHaruya.className =
-          'py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 bg-white text-slate-500 border-slate-200 hover:bg-sky-50';
-        btnJiiji.className =
-          'py-3.5 px-3 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-2 border-4 transition-all active:scale-95 shadow-md bg-orange-500 text-white border-orange-600';
-        summaryCard.className =
-          'rounded-3xl p-4 sm:p-5 text-white shadow-md transition-colors bg-gradient-to-r from-orange-500 to-amber-500';
+        header.className = 'sticky top-0 z-30 bg-orange-500 text-white shadow-md transition-colors duration-300';
+        btnJiiji.className = 'py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition shadow-md border-2 bg-white text-orange-600 border-white';
+        btnHaruya.className = 'py-2.5 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-2 transition border-2 bg-white/15 text-white/90 border-white/30 hover:bg-white/25';
       }
     }
 
-    function switchTab(tabName) {
-      state.currentTab = tabName;
+    function switchTab(tab) {
+      state.currentTab = tab;
+      document.getElementById('viewDex').classList.toggle('hidden', tab !== 'dex');
+      document.getElementById('viewProgress').classList.toggle('hidden', tab !== 'progress');
+      document.getElementById('viewAddPet').classList.toggle('hidden', tab !== 'addPet');
 
-      // セクション表示切り替え
-      document.getElementById('view-pokedex').classList.toggle('hidden', tabName !== 'pokedex');
-      document.getElementById('view-progress').classList.toggle('hidden', tabName !== 'progress');
-      document.getElementById('view-add-pet').classList.toggle('hidden', tabName !== 'add-pet');
+      const activeClass = state.currentPlayer === 'はるや' ? 'text-sky-600 font-black' : 'text-orange-500 font-black';
+      const inactiveClass = 'text-slate-400 font-bold';
 
-      // 下部ナビのアクティブスタイル
-      const navMap = {
-        pokedex: document.getElementById('nav-pokedex'),
-        progress: document.getElementById('nav-progress'),
-        'add-pet': document.getElementById('nav-add-pet')
-      };
+      document.getElementById('navDex').className = `py-2.5 flex flex-col items-center justify-center gap-0.5 text-xs sm:text-sm ${tab === 'dex' ? activeClass : inactiveClass}`;
+      document.getElementById('navProgress').className = `py-2.5 flex flex-col items-center justify-center gap-0.5 text-xs sm:text-sm ${tab === 'progress' ? activeClass : inactiveClass}`;
+      document.getElementById('navAddPet').className = `py-2.5 flex flex-col items-center justify-center gap-0.5 text-xs sm:text-sm ${tab === 'addPet' ? activeClass : inactiveClass}`;
+    }
 
-      Object.entries(navMap).forEach(([key, el]) => {
-        if (key === tabName) {
-          const activeColor =
-            state.currentPlayer === 'はるや'
-              ? 'bg-sky-100 text-sky-700'
-              : 'bg-orange-100 text-orange-700';
-          el.className = `nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95 ${activeColor}`;
-        } else {
-          el.className =
-            'nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95 text-slate-400 hover:bg-slate-50';
-        }
+    // =========================================================================
+    // 画面描画（図鑑・進捗）
+    // =========================================================================
+    function renderAllViews() {
+      switchTab(state.currentTab);
+      renderBiomeFilters();
+      renderDex();
+      renderProgress();
+    }
+
+    function selectBiome(biomeId) {
+      state.selectedBiome = biomeId;
+      renderBiomeFilters();
+      renderDex();
+    }
+
+    function renderBiomeFilters() {
+      const container = document.getElementById('biomeFilterContainer');
+      const allBtnActive = state.selectedBiome === 'すべて';
+      const activeColor = state.currentPlayer === 'はるや'
+        ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
+        : 'bg-orange-500 text-white border-orange-500 shadow-sm';
+
+      let html = `
+        <button onclick="selectBiome('すべて')" class="shrink-0 whitespace-nowrap px-3.5 py-2 rounded-2xl text-sm font-black border-2 transition ${allBtnActive ? activeColor : 'bg-white text-slate-600 border-slate-200'}">
+          🌈 すべて
+        </button>
+      `;
+
+      BIOMES.forEach(b => {
+        const isActive = state.selectedBiome === b.id;
+        html += `
+          <button onclick="selectBiome('${b.id}')" class="shrink-0 whitespace-nowrap px-3.5 py-2 rounded-2xl text-sm font-black border-2 transition ${isActive ? activeColor : 'bg-white text-slate-600 border-slate-200'}">
+            ${b.icon} ${b.name}
+          </button>
+        `;
       });
 
-      renderAllViews();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderAllViews() {
-      renderPokedex();
-      renderProgress();
-      // ナビの色もプレイヤーに合わせて更新
-      const activeBtn = document.getElementById(`nav-${state.currentTab}`);
-      if (activeBtn) {
-        const activeColor =
-          state.currentPlayer === 'はるや'
-            ? 'bg-sky-100 text-sky-700'
-            : 'bg-orange-100 text-orange-700';
-        activeBtn.className = `nav-tab-btn flex flex-col items-center justify-center py-2 px-1 rounded-2xl font-black transition active:scale-95 ${activeColor}`;
-      }
-    }
-
-    // =========================================================================
-    // 5. ペット図鑑の描画・ゲット切り替え
-    // =========================================================================
-    function setBiomeFilter(biome) {
-      state.biomeFilter = biome;
-      renderPokedex();
+      container.innerHTML = html;
     }
 
     function isPetOwned(player, petName) {
-      return state.owned.some(
-        (item) => item.player === player && item.pet === petName
-      );
+      return state.owned.some(item => item.player === player && item.pet === petName);
     }
 
-    function renderPokedex() {
+    function renderDex() {
       const allPets = getAllPets();
-      const ownedCount = allPets.filter((p) => isPetOwned(state.currentPlayer, p.name)).length;
-      const totalCount = allPets.length;
-      const percent = totalCount > 0 ? Math.round((ownedCount / totalCount) * 100) : 0;
+      const playerOwnedSet = new Set(
+        state.owned.filter(o => o.player === state.currentPlayer).map(o => o.pet)
+      );
 
-      // サマリーバー更新
-      document.getElementById('summary-player-label').textContent = `${state.currentPlayer} の ペットずかん`;
-      document.getElementById('summary-owned-count').textContent = ownedCount;
-      document.getElementById('summary-total-count').textContent = totalCount;
-      document.getElementById('summary-percent').textContent = `${percent}%`;
-      document.getElementById('summary-progress-bar').style.width = `${percent}%`;
+      const total = allPets.length;
+      const ownedCount = allPets.filter(p => playerOwnedSet.has(p.name)).length;
+      const percent = total > 0 ? Math.round((ownedCount / total) * 100) : 0;
 
-      // バイオームフィルタボタンの見た目更新
-      document.querySelectorAll('.biome-filter-btn').forEach((btn) => {
-        const b = btn.getAttribute('data-biome');
-        if (b === state.biomeFilter) {
-          btn.className =
-            'biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95 bg-slate-800 text-white border-slate-800 shadow-sm';
-        } else {
-          btn.className =
-            'biome-filter-btn shrink-0 px-4 py-2.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition active:scale-95 bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
-        }
-      });
+      document.getElementById('ownedCount').textContent = ownedCount;
+      document.getElementById('ownedCount').className = state.currentPlayer === 'はるや' ? 'text-sky-600' : 'text-orange-500';
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('completePercent').textContent = `${percent}%`;
+      document.getElementById('completeBar').style.width = `${percent}%`;
 
-      // 表示するバイオームの絞り込み
-      const container = document.getElementById('pets-container');
-      const targetBiomes =
-        state.biomeFilter === 'すべて'
-          ? BIOMES
-          : BIOMES.filter((b) => b.id === state.biomeFilter);
+      const targetBiomes = state.selectedBiome === 'すべて'
+        ? BIOMES
+        : BIOMES.filter(b => b.id === state.selectedBiome);
 
+      const container = document.getElementById('petListContainer');
       let html = '';
 
-      targetBiomes.forEach((biomeObj) => {
-        const biomePets = allPets.filter((p) => p.biome === biomeObj.id);
-        const biomeOwnedCount = biomePets.filter((p) => isPetOwned(state.currentPlayer, p.name)).length;
+      targetBiomes.forEach(biome => {
+        const biomePets = allPets.filter(p => p.biome === biome.id);
+        if (biomePets.length === 0) return;
+
+        const biomeOwned = biomePets.filter(p => playerOwnedSet.has(p.name)).length;
 
         html += `
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between px-4 py-2.5 rounded-2xl border-2 ${biomeObj.headerBg}">
-              <h2 class="text-lg sm:text-xl font-black flex items-center gap-2">
-                <span class="text-2xl">${biomeObj.icon}</span>
-                <span>${escapeHtml(biomeObj.label)}</span>
-              </h2>
-              <span class="text-sm sm:text-base font-black bg-white/80 px-3 py-0.5 rounded-full">
-                ${biomeOwnedCount} / ${biomePets.length}
-              </span>
+          <div>
+            <div class="flex items-center justify-between mb-2 px-1">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl border font-black text-sm ${biome.color}">
+                <span>${biome.icon}</span>
+                <span>${biome.name}</span>
+              </div>
+              <div class="text-sm font-black text-slate-500">
+                ${biomeOwned} / ${biomePets.length}
+              </div>
             </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
-              ${biomePets.map((pet) => createPetCardHtml(pet, isPetOwned(state.currentPlayer, pet.name), true)).join('')}
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              ${biomePets.map(pet => renderPetCard(pet, playerOwnedSet.has(pet.name))).join('')}
             </div>
           </div>
         `;
@@ -990,403 +736,208 @@
       container.innerHTML = html;
     }
 
-    /**
-     * ペットカード1枚分のHTMLを生成（図鑑本体・プレビュー共通）
-     */
-    function createPetCardHtml(pet, owned, interactive) {
+    function renderPetCard(pet, owned) {
       const style = RARITY_STYLES[pet.rarity] || RARITY_STYLES.Common;
-      const safeName = escapeHtml(pet.name);
-      const safeIncome = escapeHtml(pet.income);
-      const encodedName = encodeURIComponent(pet.name);
+      const escapedName = escapeAttr(pet.name);
+      const cardClass = owned
+        ? `${style.ownedBg} border-2 shadow-sm`
+        : `bg-white ${style.border} border-2 opacity-90`;
 
-      // Secretゲット時は背景が暗いので文字を白にする
-      const nameColorClass = owned && style.isDarkOwned ? 'text-white' : 'text-slate-800';
-      const incomeColorClass = owned && style.isDarkOwned ? 'text-amber-300' : 'text-emerald-700';
-      const clickAttr = interactive ? `onclick="togglePetOwned('${encodedName}', this)"` : '';
-
-      // ゲット済みチェック表示
-      const statusHtml = owned
-        ? `<div class="mt-2.5 py-1.5 px-2 rounded-xl ${style.checkBg} font-black text-xs sm:text-sm flex items-center justify-center gap-1 shadow-xs">
-             <span class="text-sm sm:text-base leading-none">✓</span>
-             <span>ゲット！</span>
-           </div>`
-        : `<div class="mt-2.5 py-1.5 px-2 rounded-xl bg-slate-100 text-slate-400 font-bold text-xs sm:text-sm flex items-center justify-center gap-1 border border-dashed border-slate-300">
-             <span>まだ</span>
-           </div>`;
-
-      // Cosmic（にじ色）は外枠ラッパーでレインボーボーダーを表現
-      if (style.isCosmic) {
-        const innerBg = owned ? style.ownedBg : 'bg-white/95 opacity-85';
-        return `
-          <button
-            type="button"
-            ${clickAttr}
-            class="w-full text-left rounded-2xl rarity-cosmic-border shadow-sm hover:shadow-md transition-all active:scale-95 focus:outline-none"
-          >
-            <div class="h-full rounded-[13px] p-3 flex flex-col justify-between ${innerBg}">
-              <div>
-                <div class="flex items-center justify-between gap-1 mb-1.5">
-                  <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-black ${style.badge}">
-                    ${style.label}
-                  </span>
-                  ${owned ? '<span class="text-lg leading-none" aria-hidden="true">✨</span>' : ''}
-                </div>
-                <p class="font-black text-base sm:text-lg leading-snug break-words ${nameColorClass}">
-                  ${safeName}
-                </p>
-                <p class="mt-1 font-extrabold text-sm sm:text-base ${incomeColorClass}">
-                  ${safeIncome}
-                </p>
-              </div>
-              ${statusHtml}
-            </div>
-          </button>
-        `;
-      }
-
-      // 通常レア度カード
-      const cardBg = owned ? `${style.ownedBg} shadow-md` : 'bg-white opacity-85 hover:opacity-100 shadow-xs';
       return `
-        <button
-          type="button"
-          ${clickAttr}
-          class="w-full h-full text-left rounded-2xl border-[3px] ${style.border} ${cardBg} p-3 flex flex-col justify-between transition-all active:scale-95 focus:outline-none"
-        >
-          <div>
-            <div class="flex items-center justify-between gap-1 mb-1.5">
-              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-black ${style.badge}">
-                ${style.label}
-              </span>
-              ${owned ? '<span class="text-base leading-none" aria-hidden="true">⭐</span>' : ''}
-            </div>
-            <p class="font-black text-base sm:text-lg leading-snug break-words ${nameColorClass}">
-              ${safeName}
-            </p>
-            <p class="mt-1 font-extrabold text-sm sm:text-base ${incomeColorClass}">
-              ${safeIncome}
-            </p>
+        <button onclick="togglePet('${escapedName}')" class="pet-card text-left rounded-2xl p-3 relative flex flex-col justify-between min-h-[112px] ${cardClass}">
+          <div class="flex items-start justify-between gap-1 mb-1.5">
+            <span class="inline-block px-2 py-0.5 rounded-lg text-[11px] font-black tracking-wide ${style.badge}">
+              ${style.label}
+            </span>
+            ${owned
+              ? `<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500 text-white font-black text-base shadow-sm shrink-0">✓</span>`
+              : `<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-100 text-slate-300 font-black text-sm border border-slate-200 shrink-0">○</span>`
+            }
           </div>
-          ${statusHtml}
+          <div>
+            <div class="font-black text-sm sm:text-base leading-tight text-slate-800 break-words mb-1">
+              ${escapeHtml(pet.name)}
+            </div>
+            <div class="text-xs sm:text-sm font-extrabold ${owned ? 'text-emerald-700' : 'text-slate-500'}">
+              💰 ${escapeHtml(pet.income || '-')}
+            </div>
+          </div>
         </button>
       `;
     }
 
-    /**
-     * ペットのゲット状態を切り替え（楽観的UI更新＋バックグラウンド送信）
-     */
-    function togglePetOwned(encodedPetName, buttonEl) {
-      const petName = decodeURIComponent(encodedPetName);
-      const player = state.currentPlayer;
-      const currentlyOwned = isPetOwned(player, petName);
-      const nextOwned = !currentlyOwned;
+    function renderProgress() {
+      const list = state.progress
+        .filter(item => item.player === state.currentPlayer)
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-      // 1. ローカル状態を即座に更新
+      if (list.length > 0) {
+        document.getElementById('latestSpeed').textContent = list[0].speed || '-';
+        document.getElementById('latestMoney').textContent = list[0].money || '-';
+      } else {
+        document.getElementById('latestSpeed').textContent = '-';
+        document.getElementById('latestMoney').textContent = '-';
+      }
+
+      const container = document.getElementById('progressList');
+      if (list.length === 0) {
+        container.innerHTML = `<div class="text-center py-6 text-slate-400 font-bold text-sm">まだきろくがありません</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(item => `
+        <div class="flex items-center justify-between gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="min-w-0">
+            <div class="text-xs font-bold text-slate-400">📅 ${escapeHtml(item.date)}</div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-0.5 font-black text-base text-slate-800">
+              <span>⚡ ${escapeHtml(String(item.speed))}</span>
+              <span>💰 ${escapeHtml(String(item.money))}</span>
+            </div>
+          </div>
+          <button onclick="handleDeleteProgress('${escapeAttr(item.date)}', '${escapeAttr(String(item.speed))}', '${escapeAttr(String(item.money))}')" class="shrink-0 px-3 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-600 font-bold text-xs transition">
+            けす
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // 操作アクション（ペットチェック・進捗・ペット追加）
+    // =========================================================================
+    function togglePet(petName) {
+      const player = state.currentPlayer;
+      const alreadyOwned = isPetOwned(player, petName);
+      const nextOwned = !alreadyOwned;
+
       if (nextOwned) {
         state.owned.push({ player, pet: petName });
+        showToast(`🎉 ${petName} をゲット！`, 'bg-emerald-500');
       } else {
-        state.owned = state.owned.filter(
-          (item) => !(item.player === player && item.pet === petName)
-        );
+        state.owned = state.owned.filter(o => !(o.player === player && o.pet === petName));
       }
 
       saveLocalData();
-      renderPokedex();
+      renderDex();
 
-      // タップフィードバック演出
-      if (nextOwned) {
-        showToast(`🎉 ${petName} をゲット！`, 'bg-emerald-600');
-      } else {
-        showToast(`${petName} のチェックをはずしました`, 'bg-slate-700');
-      }
-
-      // 2. スプレッドシート連携時は裏側でPOST送信
-      sendPostToGas({
+      postToServer({
         action: 'togglePet',
-        player: player,
+        player,
         pet: petName,
         owned: nextOwned
       });
     }
 
-    // =========================================================================
-    // 6. 進捗きろく（表示・追加・削除）
-    // =========================================================================
-    function renderProgress() {
-      document.getElementById('progress-form-title').textContent = `${state.currentPlayer} の きろくをつける`;
+    function handleAddProgress() {
+      const date = document.getElementById('inputDate').value;
+      const speed = document.getElementById('inputSpeed').value.trim();
+      const money = document.getElementById('inputMoney').value.trim();
 
-      // 現在のプレイヤーの記録を抽出し、日付の新しい順にソート
-      const playerRecords = state.progress
-        .map((rec, originalIndex) => ({ ...rec, _originalIndex: originalIndex }))
-        .filter((rec) => rec.player === state.currentPlayer)
-        .sort((a, b) => {
-          const dateCompare = String(b.date).localeCompare(String(a.date));
-          if (dateCompare !== 0) return dateCompare;
-          return b._originalIndex - a._originalIndex;
-        });
-
-      // 最新のスピード・お金を表示
-      const latestSpeedEl = document.getElementById('latest-speed');
-      const latestMoneyEl = document.getElementById('latest-money');
-
-      if (playerRecords.length > 0) {
-        latestSpeedEl.textContent = playerRecords[0].speed || '---';
-        latestMoneyEl.textContent = playerRecords[0].money || '---';
-      } else {
-        latestSpeedEl.textContent = 'まだなし';
-        latestMoneyEl.textContent = 'まだなし';
-      }
-
-      // 過去一覧を描画
-      const listEl = document.getElementById('progress-list');
-      if (playerRecords.length === 0) {
-        listEl.innerHTML = `
-          <div class="rounded-3xl bg-white border-2 border-dashed border-slate-300 p-6 text-center text-slate-400 font-bold">
-            まだきろくがありません。<br>上のフォームから入力してみよう！
-          </div>
-        `;
+      if (!date || (!speed && !money)) {
+        showToast('⚠️ 日付とスピードかお金を入力してね', 'bg-amber-500');
         return;
       }
 
-      listEl.innerHTML = playerRecords
-        .map((rec) => {
-          return `
-            <div class="rounded-2xl bg-white border-2 border-slate-200 p-4 shadow-xs flex items-center justify-between gap-3">
-              <div class="min-w-0 flex-1 space-y-1.5">
-                <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs sm:text-sm font-extrabold">
-                  <span>📅</span>
-                  <span>${escapeHtml(rec.date)}</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 pt-0.5">
-                  <div class="bg-amber-50 rounded-xl px-3 py-2 border border-amber-200">
-                    <span class="block text-[11px] font-bold text-amber-700">⚡ スピード</span>
-                    <span class="block text-base sm:text-lg font-black text-amber-900 break-all">${escapeHtml(rec.speed)}</span>
-                  </div>
-                  <div class="bg-emerald-50 rounded-xl px-3 py-2 border border-emerald-200">
-                    <span class="block text-[11px] font-bold text-emerald-700">💰 お金</span>
-                    <span class="block text-base sm:text-lg font-black text-emerald-900 break-all">${escapeHtml(rec.money)}</span>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onclick="openConfirmDeleteModal(${rec._originalIndex})"
-                class="shrink-0 w-11 h-11 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 text-rose-600 border-2 border-rose-200 flex items-center justify-center text-xl transition"
-                aria-label="この記録を削除"
-              >
-                🗑️
-              </button>
-            </div>
-          `;
-        })
-        .join('');
-    }
-
-    /**
-     * 進捗記録の保存フォーム送信
-     */
-    function handleProgressSubmit(event) {
-      event.preventDefault();
-
-      const dateInput = document.getElementById('input-date');
-      const speedInput = document.getElementById('input-speed');
-      const moneyInput = document.getElementById('input-money');
-
-      const date = dateInput.value.trim();
-      const speed = speedInput.value.trim();
-      const money = moneyInput.value.trim();
-
-      if (!date || !speed || !money) {
-        showToast('日付・スピード・お金を入力してね！', 'bg-rose-500');
-        return;
-      }
-
-      const newRecord = {
+      const record = {
         player: state.currentPlayer,
-        date: date,
-        speed: speed,
-        money: money
+        date,
+        speed: speed || '-',
+        money: money || '-'
       };
 
-      // 楽観的UI更新
-      state.progress.push(newRecord);
+      state.progress.push(record);
       saveLocalData();
       renderProgress();
 
-      // 入力欄クリア（日付はそのまま）
-      speedInput.value = '';
-      moneyInput.value = '';
+      document.getElementById('inputSpeed').value = '';
+      document.getElementById('inputMoney').value = '';
+      showToast('💾 きろくをほぞんしました！', 'bg-emerald-500');
 
-      showToast('💾 きろくを保存しました！', 'bg-sky-600');
-
-      // GASへPOST送信
-      sendPostToGas({
+      postToServer({
         action: 'addProgress',
-        player: newRecord.player,
-        date: newRecord.date,
-        speed: newRecord.speed,
-        money: newRecord.money
+        ...record
       });
     }
 
-    /**
-     * 削除確認モーダルを開く
-     */
-    function openConfirmDeleteModal(originalIndex) {
-      const rec = state.progress[originalIndex];
-      if (!rec) return;
+    function handleDeleteProgress(date, speed, money) {
+      if (!confirm(`${date} のきろくをけしてもいいですか？`)) return;
 
-      state.pendingDeleteIndex = originalIndex;
-      document.getElementById('confirm-modal-detail').textContent =
-        `${rec.date} ／ ⚡ ${rec.speed} ／ 💰 ${rec.money}`;
+      const player = state.currentPlayer;
+      const idx = state.progress.findIndex(item =>
+        item.player === player &&
+        String(item.date) === String(date) &&
+        String(item.speed) === String(speed) &&
+        String(item.money) === String(money)
+      );
 
-      const confirmBtn = document.getElementById('confirm-delete-btn');
-      confirmBtn.onclick = () => executeDeleteProgress();
+      if (idx !== -1) {
+        state.progress.splice(idx, 1);
+        saveLocalData();
+        renderProgress();
+        showToast('🗑️ きろくをけしました', 'bg-slate-600');
 
-      document.getElementById('confirm-modal').classList.remove('hidden');
+        postToServer({
+          action: 'deleteProgress',
+          player,
+          date,
+          speed,
+          money
+        });
+      }
     }
 
-    function closeConfirmModal() {
-      state.pendingDeleteIndex = null;
-      document.getElementById('confirm-modal').classList.add('hidden');
+    function updateAddPetPreview() {
+      const name = document.getElementById('newPetName').value.trim() || 'なまえを入れてね';
+      const biome = document.getElementById('newPetBiome').value || 'もり';
+      const rarity = document.getElementById('newPetRarity').value || 'Common';
+      const income = document.getElementById('newPetIncome').value.trim() || '$100/s';
+
+      const previewEl = document.getElementById('addPetPreview');
+      previewEl.innerHTML = `<div class="max-w-[200px] pointer-events-none">${renderPetCard({ name, biome, rarity, income }, true)}</div>`;
     }
 
-    function executeDeleteProgress() {
-      const idx = state.pendingDeleteIndex;
-      if (idx === null || !state.progress[idx]) {
-        closeConfirmModal();
+    function handleAddPet() {
+      const name = document.getElementById('newPetName').value.trim();
+      const biome = document.getElementById('newPetBiome').value;
+      const rarity = document.getElementById('newPetRarity').value;
+      const income = document.getElementById('newPetIncome').value.trim() || '-';
+
+      if (!name) {
+        showToast('⚠️ ペットの名前を入力してね', 'bg-amber-500');
         return;
       }
 
-      const target = state.progress[idx];
-      state.progress.splice(idx, 1);
-      saveLocalData();
-      closeConfirmModal();
-      renderProgress();
-
-      showToast('🗑️ きろくを消しました', 'bg-slate-700');
-
-      sendPostToGas({
-        action: 'deleteProgress',
-        player: target.player,
-        date: target.date,
-        speed: target.speed,
-        money: target.money
-      });
-    }
-
-    // =========================================================================
-    // 7. ペット追加機能
-    // =========================================================================
-    function updatePetPreview() {
-      const biome = document.getElementById('pet-biome').value;
-      const name = document.getElementById('pet-name').value.trim() || 'なまえを入れてね';
-      const rarity = document.getElementById('pet-rarity').value;
-      const income = document.getElementById('pet-income').value.trim() || '$100/s';
-
-      const previewEl = document.getElementById('add-pet-preview');
-      previewEl.innerHTML = createPetCardHtml({ biome, name, rarity, income }, true, false);
-    }
-
-    function handleAddPetSubmit(event) {
-      event.preventDefault();
-
-      const biome = document.getElementById('pet-biome').value;
-      const nameInput = document.getElementById('pet-name');
-      const rarity = document.getElementById('pet-rarity').value;
-      const incomeInput = document.getElementById('pet-income');
-
-      const name = nameInput.value.trim();
-      const income = incomeInput.value.trim();
-
-      if (!name || !income) {
-        showToast('なまえと収入を入力してね！', 'bg-rose-500');
+      const exists = getAllPets().some(p => p.name.toLowerCase() === name.toLowerCase());
+      if (exists) {
+        showToast('⚠️ 同じ名前のペットがもうあるよ', 'bg-amber-500');
         return;
       }
 
-      // 重複チェック
-      const allPets = getAllPets();
-      if (allPets.some((p) => p.name.toLowerCase() === name.toLowerCase())) {
-        showToast('そのなまえのペットはもういるよ！', 'bg-amber-600');
-        return;
-      }
-
-      const newPet = { biome, name, rarity, income };
+      const newPet = { name, biome, rarity, income };
       state.customPets.push(newPet);
       saveLocalData();
 
-      // 入力リセット
-      nameInput.value = '';
-      incomeInput.value = '';
-      updatePetPreview();
+      document.getElementById('newPetName').value = '';
+      document.getElementById('newPetIncome').value = '';
+      updateAddPetPreview();
 
-      showToast(`✨ ${name} をずかんに追加したよ！`, 'bg-emerald-600');
+      state.selectedBiome = biome;
+      switchTab('dex');
+      renderAllViews();
+      showToast(`✨ ${name} をずかんに追加しました！`, 'bg-sky-500');
 
-      // GASへPOST送信
-      sendPostToGas({
+      postToServer({
         action: 'addPet',
-        biome: newPet.biome,
-        name: newPet.name,
-        rarity: newPet.rarity,
-        income: newPet.income
+        ...newPet
       });
-
-      // 図鑑タブへ移動して追加したバイオームを表示
-      state.biomeFilter = biome;
-      switchTab('pokedex');
     }
 
     // =========================================================================
-    // 8. Googleスプレッドシート（GAS）連携
+    // スプレッドシート連携（GET / POST）
     // =========================================================================
-    function updateSetupBanner() {
-      const banner = document.getElementById('setup-banner');
-      if (state.gasUrl) {
-        banner.classList.add('hidden');
-      } else {
-        banner.classList.remove('hidden');
-      }
-    }
-
-    /**
-     * 画面上部の同期ステータスバッジを更新
-     * type: 'syncing' | 'ok' | 'local' | 'error'
-     */
-    function setSyncStatus(type, message) {
-      const badge = document.getElementById('sync-status-badge');
-      const syncIcon = document.getElementById('sync-icon');
-
-      if (type === 'syncing') {
-        syncIcon.classList.add('animate-spin-icon');
-        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span><span class="text-sky-700">${escapeHtml(message)}</span>`;
-      } else if (type === 'ok') {
-        syncIcon.classList.remove('animate-spin-icon');
-        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span class="text-emerald-700">${escapeHtml(message)}</span>`;
-      } else if (type === 'local') {
-        syncIcon.classList.remove('animate-spin-icon');
-        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span><span class="text-amber-700">${escapeHtml(message)}</span>`;
-      } else {
-        syncIcon.classList.remove('animate-spin-icon');
-        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span><span class="text-rose-700">${escapeHtml(message)}</span>`;
-      }
-    }
-
-    function updateLastSyncTime() {
-      const now = new Date();
-      const hh = String(now.getHours()).padStart(2, '0');
-      const mm = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('last-sync-time').textContent = `最終同期 ${hh}:${mm}`;
-    }
-
-    /**
-     * GETリクエストでスプレッドシートから全データを取得
-     */
     async function syncFromServer(showNotify = false) {
       if (!state.gasUrl) {
-        if (showNotify) {
-          showToast('先に⚙️設定からURLを入れてね！', 'bg-amber-600');
-          openSettingsModal();
-        }
+        setSyncStatus('idle', 'まだスプレッドシートに同期していません');
+        if (showNotify) openSettingsModal();
         return;
       }
 
@@ -1434,159 +985,88 @@
       }
     }
 
-    /**
-     * POSTリクエストで変更内容をスプレッドシートに送信
-     * （CORSプリフライト回避のため text/plain で送信）
-     */
-    async function sendPostToGas(payload) {
-      if (!state.gasUrl) {
-        setSyncStatus('local', 'お試しモード（この端末のみ保存）');
-        return;
-      }
-
-      setSyncStatus('syncing', 'スプレッドシートに保存中...');
-
+    async function postToServer(payload) {
+      if (!state.gasUrl) return;
+      setSyncStatus('syncing', 'ほぞん中...');
       try {
-        const response = await fetch(state.gasUrl, {
+        await fetch(state.gasUrl, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-
-        if (!response.ok) {
-          throw new Error(`HTTPエラー: ${response.status}`);
-        }
-
-        const result = await response.json();
-        if (result.status && result.status !== 'ok') {
-          throw new Error(result.message || '保存エラー');
-        }
-
-        setSyncStatus('ok', '保存しました！');
+        setSyncStatus('ok', 'スプレッドシートにほぞんしました');
         updateLastSyncTime();
       } catch (err) {
-        console.error('POST送信エラー:', err);
-        setSyncStatus('error', 'オフライン（端末に仮保存しました）');
+        console.error('送信エラー:', err);
+        setSyncStatus('error', '送信エラー（あとで同期を押してね）');
       }
     }
 
+    function setSyncStatus(type, message) {
+      const el = document.getElementById('syncStatusText');
+      const icons = { idle: '⚪', syncing: '🔄', ok: '🟢', error: '🔴' };
+      el.innerHTML = `<span>${icons[type] || '⚪'}</span><span>${escapeHtml(message)}</span>`;
+    }
+
+    function updateLastSyncTime() {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('lastSyncTime').textContent = `${hh}:${mm} 更新`;
+    }
+
     // =========================================================================
-    // 9. 設定モーダルの操作
+    // 設定モーダル・ユーティリティ
     // =========================================================================
     function openSettingsModal() {
-      document.getElementById('gas-url-input').value = state.gasUrl;
-      const resultBox = document.getElementById('test-result-box');
-      resultBox.classList.add('hidden');
-      resultBox.textContent = '';
-      document.getElementById('settings-modal').classList.remove('hidden');
+      document.getElementById('inputGasUrl').value = state.gasUrl || '';
+      document.getElementById('settingsModal').classList.remove('hidden');
     }
 
     function closeSettingsModal() {
-      document.getElementById('settings-modal').classList.add('hidden');
+      document.getElementById('settingsModal').classList.add('hidden');
     }
 
-    async function testGasConnection() {
-      const url = document.getElementById('gas-url-input').value.trim();
-      const resultBox = document.getElementById('test-result-box');
-      const btn = document.getElementById('btn-test-gas');
-
-      if (!url || !url.startsWith('https://')) {
-        resultBox.className = 'rounded-2xl p-3 text-sm font-bold bg-rose-50 text-rose-700 border border-rose-200';
-        resultBox.textContent = '⚠️ 「https://」から始まる正しいURLを入力してください。';
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = '🔄 テスト中...';
-      resultBox.className = 'rounded-2xl p-3 text-sm font-bold bg-sky-50 text-sky-700 border border-sky-200';
-      resultBox.textContent = 'スプレッドシートに接続しています...';
-
-      try {
-        const res = await fetch(url, { method: 'GET', cache: 'no-store' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        if (json.status === 'ok') {
-          resultBox.className = 'rounded-2xl p-3 text-sm font-bold bg-emerald-50 text-emerald-800 border border-emerald-200';
-          resultBox.textContent = '✅ せいこう！スプレッドシートとつながりました！「保存して同期する」を押してね。';
-        } else {
-          throw new Error('レスポンスに status: "ok" がありません');
-        }
-      } catch (err) {
-        resultBox.className = 'rounded-2xl p-3 text-sm font-bold bg-rose-50 text-rose-700 border border-rose-200';
-        resultBox.textContent = '❌ つながりませんでした。URLが合っているか、Apps Scriptのアクセス設定が「全員」になっているか確認してください。';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '🔍 接続テストをする';
-      }
-    }
-
-    function saveGasUrl() {
-      const url = document.getElementById('gas-url-input').value.trim();
-      if (url && !url.startsWith('https://')) {
-        showToast('「https://」から始まるURLを入れてね', 'bg-rose-500');
-        return;
-      }
-
+    async function saveAndTestGasUrl() {
+      const url = document.getElementById('inputGasUrl').value.trim();
       state.gasUrl = url;
-      try {
+      if (url) {
         localStorage.setItem(STORAGE_KEYS.GAS_URL, url);
-      } catch (e) {}
-
-      updateSetupBanner();
-      closeSettingsModal();
-
-      if (state.gasUrl) {
-        syncFromServer(true);
       } else {
-        setSyncStatus('local', 'お試しモード（この端末のみ保存）');
-      }
-    }
-
-    function clearGasUrl() {
-      state.gasUrl = '';
-      try {
         localStorage.removeItem(STORAGE_KEYS.GAS_URL);
-      } catch (e) {}
-
-      document.getElementById('gas-url-input').value = '';
-      updateSetupBanner();
+      }
       closeSettingsModal();
-      setSyncStatus('local', 'お試しモード（この端末のみ保存）');
-      document.getElementById('last-sync-time').textContent = '';
-      showToast('お試しモードに切り替えました', 'bg-slate-700');
+      await syncFromServer(true);
     }
 
-    // =========================================================================
-    // 10. ユーティリティ関数
-    // =========================================================================
     let toastTimer = null;
     function showToast(message, bgClass = 'bg-slate-800') {
-      const toast = document.getElementById('toast');
-      const inner = document.getElementById('toast-inner');
-
-      inner.textContent = message;
-      inner.className = `px-5 py-3 rounded-full shadow-lg font-black text-sm sm:text-base text-white whitespace-nowrap ${bgClass}`;
-
-      toast.classList.remove('opacity-0', '-translate-y-2');
-      toast.classList.add('opacity-100', 'translate-y-0');
-
-      if (toastTimer) clearTimeout(toastTimer);
+      const el = document.getElementById('toast');
+      el.className = `fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl text-white font-black text-sm shadow-xl transition-all duration-300 max-w-[90vw] text-center ${bgClass} opacity-100`;
+      el.textContent = message;
+      clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
-        toast.classList.add('opacity-0', '-translate-y-2');
-      }, 2400);
+        el.classList.remove('opacity-100');
+        el.classList.add('opacity-0');
+      }, 2200);
     }
 
     function escapeHtml(str) {
-      return String(str ?? '')
+      return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+
+    function escapeAttr(str) {
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    // 起動
+    window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
